@@ -5,14 +5,14 @@ class NegociacaoController
     private _inputQuantidade: HTMLInputElement;
     private _inputValor: HTMLInputElement;
     private _negociacoes = new Negociacoes();
-    private _negociacoesView = new this.NegociacoesView('#negociacoesView');// passando a div onde será renderizada a tabela
+    private _negociacoesView = new NegociacoesView('#negociacoesView');// passando a div onde será renderizada a tabela
 
     constructor()
     {
         this._inputData = <HTMLInputElement> document.querySelector('#data');
         this._inputQuantidade = <HTMLInputElement>  document.querySelector('#quantidade');
         this._inputValor = <HTMLInputElement> document.querySelector('#valor');
-        this._negociacoesView.update();
+        this._negociacoesView.update(this._negociacoes);
     }
 
     adiciona(event: Event)
@@ -31,9 +31,8 @@ class NegociacaoController
         //Iniciar o array com 0 ou simplesmente limpá-lo
         //this._negociacoes.obtemArrayNegociacao().lengh = 0;
         this._negociacoes.adiciona(negociacao);
-        this._negociacoes.obtemArrayNegociacao().array.forEach(negociacao => {
-            console.log(negociacao.data);
-        });
+        this._negociacoes.obtemArrayNegociacao();
+        
     }
 
 }
