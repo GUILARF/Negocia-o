@@ -8,14 +8,14 @@ export class NegociacaoController {
     private _inputQuantidade: JQuery;
     private _inputValor: JQuery;
     private _negociacoes = new Negociacoes();
-    private _negociacoesView = new NegociacoesView('#negociacoesView');
-    private _mensagemView = new MensagemView('#mensagemView');
+    private _negociacoesView = new NegociacoesView('#negociacoesView', true);
+    private _mensagemView = new MensagemView('#mensagemView', true);
 
     constructor() {
         this._inputData = $('#data');
         this._inputQuantidade = $('#quantidade');
         this._inputValor = $('#valor');
-        this._negociacoesView.update(this._negociacoes);
+        this._negociacoesView.update(this._negociacoes, this._negociacoesView._escapar);
     }
 
     adiciona(event: Event) {
@@ -30,8 +30,7 @@ export class NegociacaoController {
         );
 
         this._negociacoes.adiciona(negociacao);
-
-        this._negociacoesView.update(this._negociacoes);
-        this._mensagemView.update('Negociação adicionada com sucesso!');
+        this._negociacoesView.update(this._negociacoes, this._negociacoesView._escapar);
+        this._mensagemView.update('Negociação adicionada com sucesso!', this._mensagemView._escapar);
     }
 }
